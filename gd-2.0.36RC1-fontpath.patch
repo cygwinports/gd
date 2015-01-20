@@ -1,0 +1,53 @@
+--- origsrc/gd-2.0.36RC1/gd.h	2007-11-27 09:30:34.000000000 +0100
++++ src/gd-2.0.36RC1/gd.h	2014-12-08 14:14:43.087729000 +0100
+@@ -71,7 +71,7 @@ extern "C"
+ /* 2.0.23: more Type 1 fonts */
+ #ifndef DEFAULT_FONTPATH
+ /* default fontpath for unix systems  - whatever happened to standards ! */
+-#define DEFAULT_FONTPATH "/usr/X11R6/lib/X11/fonts/TrueType:/usr/X11R6/lib/X11/fonts/truetype:/usr/X11R6/lib/X11/fonts/TTF:/usr/share/fonts/TrueType:/usr/share/fonts/truetype:/usr/openwin/lib/X11/fonts/TrueType:/usr/X11R6/lib/X11/fonts/Type1:/usr/lib/X11/fonts/Type1:/usr/openwin/lib/X11/fonts/Type1"
++#define DEFAULT_FONTPATH "/usr/share/fonts/Type1:/usr/share/fonts/TTF:/usr/share/fonts/corefonts:/usr/local/share/fonts"
+ #endif
+ #ifndef PATHSEPARATOR
+ #define PATHSEPARATOR ":"
+--- origsrc/gd-2.0.36RC1/gdft.c	2007-11-27 09:30:34.000000000 +0100
++++ src/gd-2.0.36RC1/gdft.c	2014-12-08 14:14:43.090729400 +0100
+@@ -57,7 +57,7 @@ static char *font_pattern(char **fontpat
+ #if defined(__APPLE__) || (defined(__MWERKS__) && defined(macintosh))
+ #define DEFAULT_FONTPATH "/usr/share/fonts/truetype:/System/Library/Fonts:/Library/Fonts"
+ #else
+-#define DEFAULT_FONTPATH "/usr/share/fonts/truetype"
++#define DEFAULT_FONTPATH "/usr/share/fonts/Type1:/usr/share/fonts/TTF:/usr/share/fonts/corefonts:/usr/local/share/fonts"
+ #endif
+ #endif
+ #ifndef PATHSEPARATOR
+@@ -1661,7 +1661,7 @@ static char * font_path(char **fontpath,
+ BGD_DECLARE(int) gdFTUseFontConfig(int flag)
+ {
+ #ifdef HAVE_LIBFONTCONFIG
+-	fontConfigFlag = 1;
++	fontConfigFlag = flag;
+ 	return 1;
+ #else
+ 	return 0;
+--- origsrc/gd-2.0.36RC1/gdtestft.c	2007-11-27 09:30:34.000000000 +0100
++++ src/gd-2.0.36RC1/gdtestft.c	2014-12-08 14:14:43.091729500 +0100
+@@ -66,7 +66,7 @@ main (int argc, char *argv[])
+       fprintf (stderr, "Usage: gdtestft fontfilename\n");
+       fprintf (stderr,
+ 	       "If fontfilename is not a full or relative path, GDFONTPATH is searched for\n"
+-	       "it. If GDFONTPATH is not set, /usr/share/fonts/truetype is searched.\n");
++	       "it. If GDFONTPATH is not set, /usr/share/fonts/Type1:/usr/share/fonts/TTF:/usr/share/fonts/corefonts:/usr/local/share/fonts is searched.\n");
+       exit (1);
+     }
+   /* obtain brect so that we can size the image */
+--- origsrc/gd-2.0.36RC1/annotate.c	2007-11-27 09:30:34.000000000 +0100
++++ src/gd-2.0.36RC1/annotate.c	2014-12-08 14:14:43.080228100 +0100
+@@ -51,7 +51,7 @@ main (int argc, char *argv[])
+       fprintf (stderr, "move x y\n");
+       fprintf (stderr, "text actual-output-text\n\n");
+       fprintf (stderr,
+-	       "If the file 'paris.ttf' exists in /usr/share/fonts/truetype or in a\n");
++	       "If the file 'paris.ttf' exists in /usr/share/fonts/Type1:/usr/share/fonts/TTF:/usr/share/fonts/corefonts:/usr/local/share/fonts or in a\n");
+       fprintf (stderr,
+ 	       "location specified in the GDFONTPATH environment variable, 'font paris' is\n");
+       fprintf (stderr,

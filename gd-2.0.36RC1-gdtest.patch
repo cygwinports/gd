@@ -1,0 +1,11 @@
+--- origsrc/gd-2.0.36RC1/tests/CMakeLists.txt	2007-11-27 09:30:34.000000000 +0100
++++ src/gd-2.0.36RC1/tests/CMakeLists.txt	2014-12-08 14:14:43.093229700 +0100
+@@ -21,7 +21,7 @@ if (BUILD_TEST)
+ 	message(STATUS "gd libs dir: ${GD_LIBS_DIR}" )
+ 
+ 	include_directories (BEFORE ${GD_INCLUDE_DIR} "${GDTEST_SOURCE_DIR}")
+-	link_directories ("${GD_LIBS_DIR}" "${GDTEST_BINARY_DIR}/gdtest")
++	link_directories ("${GD_LIBS_DIR}" "${GDTEST_BINARY_DIR}../..")
+ 
+ 	#FIND_LIBRARY(GD_LIB "gd" PATHS ${GD_LIBS_DIR})
+ 	#message(STATUS "GD_LIB: ${GD_LIB}")
