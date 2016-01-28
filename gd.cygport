@@ -1,25 +1,17 @@
 NAME="gd"
-VERSION=2.0.36RC1
-RELEASE=14
+VERSION=2.1.1
+RELEASE=1
 CATEGORY="Libs"
 SUMMARY="A library for the dynamic creation of images by programmers"
 DESCRIPTION="GD is an open source code library for the dynamic creation of images by programmers.
 GD creates PNG, JPEG and GIF images, among other formats. GD is commonly used to
 generate charts, graphics, thumbnails, and most anything else, on the fly. While not
 restricted to use on the web, the most common applications of GD involve web site development."
-HOMEPAGE="http://www.libgd.org/"
-SRC_URI="http://www.libgd.org/releases/gd-${VERSION}.tar.bz2"
-PATCH_URI="
-  gd-2.0.36RC1-cmake.patch
-  gd-2.0.36RC1-fontpath.patch
-  gd-2.0.36RC1-gdtest.patch
-  gd-2.0.36RC1-libpng.patch
-  gd-2.0.36RC1-iconv.patch
-"
+HOMEPAGE="http://libgd.bitbucket.org/"
+SRC_URI="https://bitbucket.org/libgd/gd-libgd/downloads/libgd-${VERSION}.tar.xz"
+SRC_DIR="libgd-${VERSION}"
 
-DEPENDS="cmake"
-
-PKG_NAMES="gd libgd2 libgd-devel"
+PKG_NAMES="gd libgd3 libgd-devel"
 gd_CATEGORY="Graphics"
 gd_SUMMARY="${SUMMARY} (utilities)"
 gd_CONTENTS="
@@ -27,66 +19,24 @@ gd_CONTENTS="
   usr/bin/bdftogd
   usr/share/doc/
 "
-libgd2_SUMMARY="${SUMMARY} (runtime)"
-libgd2_CONTENTS="
-  usr/bin/cyggd-2.dll
+libgd3_SUMMARY="${SUMMARY} (runtime)"
+libgd3_CONTENTS="
+  usr/bin/cyggd-3.dll
 "
 libgd_devel_SUMMARY="${SUMMARY} (development)"
-libgd_devel_REQUIRES="libfontconfig-devel libfreetype-devel libjpeg-devel libpng-devel libXpm-devel zlib-devel coreutils sed"
 libgd_devel_CONTENTS="
   usr/bin/*-config
   usr/include/
   usr/lib/
 "
 
-DIFF_EXCLUDES="config.hin err.out"
-
-KEEP_LA_FILES=none
-
 src_compile() {
 	cd ${S}
-	cygautoreconf
+#	cygautoreconf
 	lndirs
 	cd ${B}
 	cygconf
 	cygmake
-
-	# cmake in the test stage will create a new Makefile without installation target, so we save it
-	cp Makefile Makefile.install.save
 }
 
-src_test() {
-	cd ${B}
-
-#	for i in ` find  . -maxdepth 1 -name "*test*.exe"`
-#	do
-#	  $i
-#	done
-
-	./circletexttest
-	./fontconfigtest
-	./fontsizetest
-	./fontwheeltest
-	./gifanimtest
-	./testtr
-	./gdtest   demoin.png
-	./gdtestft courbi
-	./testac   demoin.png
-
-	export PATH=/usr/bin:/usr/local/bin
-	cmake -DBUILD_TEST=1 .
-	sed -e 's#-L../..#-L../.. -lgd#g' -i tests/gdtest/CMakeFiles/gdTest.dir/link.txt
-	make
-	cp tests/gdtest/cyggdTest.dll .
-	export PATH=${B}:${B}/.libs:$PATH
-	ctest .
-}
-
-src_install() {
-	cd ${B}
-	# cmake in the test stage will create a new Makefile without installation target, so we restore it
-	cp Makefile.install.save Makefile
-	cyginstall
-}
-
-DOCS="index.html readme.jpn README-JPEG.TXT README.TESTING"
+KEEP_LA_FILES=none
