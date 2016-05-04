@@ -1,6 +1,6 @@
 NAME="gd"
 VERSION=2.1.1
-RELEASE=1
+RELEASE=2
 CATEGORY="Libs"
 SUMMARY="A library for the dynamic creation of images by programmers"
 DESCRIPTION="GD is an open source code library for the dynamic creation of images by programmers.
@@ -10,6 +10,7 @@ restricted to use on the web, the most common applications of GD involve web sit
 HOMEPAGE="http://libgd.bitbucket.org/"
 SRC_URI="https://bitbucket.org/libgd/gd-libgd/downloads/libgd-${VERSION}.tar.xz"
 SRC_DIR="libgd-${VERSION}"
+PATCH_URI="http://pkgs.fedoraproject.org/cgit/rpms/gd.git/plain/gd-heap-overflow.patch"
 
 PKG_NAMES="gd libgd3 libgd-devel"
 gd_CATEGORY="Graphics"
