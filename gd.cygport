@@ -1,6 +1,6 @@
 NAME="gd"
 VERSION=2.1.1
-RELEASE=3
+RELEASE=4
 CATEGORY="Libs"
 SUMMARY="A library for the dynamic creation of images by programmers"
 DESCRIPTION="GD is an open source code library for the dynamic creation of images by programmers.
@@ -12,10 +12,14 @@ SRC_URI="https://bitbucket.org/libgd/gd-libgd/downloads/libgd-${VERSION}.tar.xz"
 SRC_DIR="libgd-${VERSION}"
 PATCH_URI="
 	http://pkgs.fedoraproject.org/cgit/rpms/gd.git/plain/gd-heap-overflow.patch
-	http://pkgs.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.1.1-gdImagreScaleTwoPass-leak.patch?h=f23
 	http://pkgs.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.1.1-xbm-large-names-overflow.patch?h=f23
 	http://pkgs.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.1.1-CVE-2015-8874.patch?h=f23
 	http://pkgs.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.1.1-CVE-2016-5766.patch?h=f23
+	http://pkgs.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.2.3-CVE-2016-6161.patch?h=f23
+	http://pkgs.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.2.3-CVE-2016-6207.patch?h=f23
+	http://pkgs.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.2.3-overflow-in-gdImageWebpCtx.patch?h=f23
+	http://pkgs.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.2.3-dynamicGetbuf-negative-rlen.patch?h=f23
+	http://pkgs.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.2.x-fix-invalid-read-in-gdImageCreateFromTiffPtr.patch?h=f23
 "
 
 PKG_NAMES="gd libgd3 libgd-devel"
